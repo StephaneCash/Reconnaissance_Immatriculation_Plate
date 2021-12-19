@@ -10,6 +10,7 @@ function Home() {
     const [data, setData] = useState([]);
     const [etat, setEtat] = useState(false);
     const [etatLoad, setEtatLoad] = useState(true);
+    const [valueInput, setValueInput] = useState("");
 
     const fetchData = () => {
         Api.getAllagent().then(res => {
@@ -34,7 +35,11 @@ function Home() {
                 <div className="col-md-9 menuPrincipal">
                     <div className="d-flex">
                         <div className="col-md-4">
-                            <input type="search" placeholder="Rechercher" className="form-control" value="" />
+                            <input type="search" 
+                            placeholder="Rechercher" 
+                            onChange={(e)=>setValueInput(e.target.value)}
+                            className="form-control" 
+                            value={valueInput} />
                         </div>
                         <div className="col-md-4">
                             <button type="submit" className="btn btn-success" style={{ marginLeft: "10px" }}>Ajouter un nouveau agent</button>
@@ -59,10 +64,10 @@ function Home() {
                                             data.length > 0 ? (
                                                 <>
                                                     {
-                                                        data.map((val) => {
+                                                        data.map((val, index) => {
                                                             return (
                                                                 <>
-                                                                    <tr>
+                                                                    <tr key={index}>
                                                                         <td>{val.id}</td>
                                                                         <td>{val.noms}</td>
                                                                         <td>{val.fonction}</td>
