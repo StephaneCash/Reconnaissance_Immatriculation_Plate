@@ -1,0 +1,29 @@
+.connexion .card{
+    width: 50%;
+    height:50vh;
+    margin: 20px auto;
+}
+
+.connexion .card .card-header{
+    height:15vh;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.connexion .card .faUser{
+    font-size: 30px;
+}
+
+.form1{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.form input:focus{
+    box-shadow: none;
+    border: 1px solid silver;
+}
+
+.form button:focus{
+    box-shadow: none;
+}
