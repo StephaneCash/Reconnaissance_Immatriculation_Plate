@@ -12,7 +12,16 @@ const ModalDetail = (props) => {
                     Reconnaissance
                 </Modal.Header>
                 <Modal.Body>
-                    
+                    <table className="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Noms</th>
+                                <th>Fonction</th>
+                                <th>Profile</th>
+                                <th>Numéro d'immatriculation</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </Modal.Body>
                 <Modal.Footer className="headerModal">
                     <button className="btn btn-dark" onClick={props.close}>Fermer</button>
