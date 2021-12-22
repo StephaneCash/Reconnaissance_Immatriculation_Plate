@@ -55,8 +55,8 @@ function Home() {
                                             <th>#</th>
                                             <th>Noms</th>
                                             <th>Fonction</th>
-                                            <th>Numéro de plaque_immatriculation</th>
-                                            <th>Actions</th>
+                                            <th style={{width:"200px !important"}}>Numéro de plaque_immatriculation</th>
+                                            <th style={{width:"200px !important"}}>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,7 +72,7 @@ function Home() {
                                                                         <td>{val.noms}</td>
                                                                         <td>{val.fonction}</td>
                                                                         <td>{val.num_plaque}</td>
-                                                                        <td style={{ width: "230px " }}>
+                                                                        <td style={{ width: "300px " }}>
                                                                             <button className="btn btn" style={{ border: "1px solid silver" }}>
                                                                                 <i className="fa fa-edit"></i> Editer
                                                                             </button>

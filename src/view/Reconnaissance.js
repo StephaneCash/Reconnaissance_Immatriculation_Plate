@@ -47,7 +47,7 @@ function Reconnaissance() {
                     console.log("Found : ", dataObj.num_plaque);
                     setContent({
                         id: dataObj.id,
-                        data : dataObj.num_plaque
+                        data: dataObj.num_plaque
                     })
                 } else {
                     msg = "Data not found";
@@ -63,6 +63,7 @@ function Reconnaissance() {
 
     const handleButton = () => {
         setIsLoading(true);
+        console.log(image);
         Tesseract.recognize(image, "eng", {
             logger: (m) => {
                 console.log(m);
@@ -101,74 +102,71 @@ function Reconnaissance() {
                     <MenuLeft />
                 </div>
                 <div className="col-md-10">
-                    <div className="container d-flex">
-                        <div className="col-md-6 " >
-                            {
-                                !isLoading && <h3 className="mt-5 mb-4 text-center" > Rechercher photo
-                                </h3>
-                            }
-                            {
-                                !isLoading && text && (
-                                    <>
-                                        Numéro trouvé : <h4>{text}</h4>
-                                        <input
-                                            className="form-control"
-                                            rows="3"
-                                            value={text}
-                                            onChange={(e) => setText(e.target.value)}
-                                            disabled
-                                            type='hidden'
+                    <div className="col-md-8 "  style={{margin: "0 auto"}}>
+                        {
+                            !isLoading && <h3 className="mt-5 mb-4 text-center" > Rechercher par photo
+                            </h3>
+                        }
+                        {
+                            !isLoading && text && (
+                                <>
+                                    Numéro trouvé : <h4>{text}</h4>
+                                    <input
+                                        className="form-control"
+                                        rows="3"
+                                        value={text}
+                                        onChange={(e) => setText(e.target.value)}
+                                        disabled
+                                        type='hidden'
+                                    />
+                                    <p>
+                                        <input type="button"
+                                            onClick={reinit}
+                                            className="btn btn-dark mt-3"
+                                            value="Rechercher autres" />
+                                        <button className='btn btn-success' onClick={verifData} style={{ marginLeft: "10px" }}> Vérifier </button>
+                                    </p>
+                                </>
+                            )
+                        }
+                        {/* Forms */}
+                        {
+                            !isLoading && !text && (
+                                <>
+                                    < input type="file"
+                                        className="form-control"
+                                        onChange={
+                                            (e) => setImage(URL.createObjectURL(e.target.files[0]))
+                                        }
+                                    />  <input
+                                        type="button"
+                                        className="form-control btn btn-default mt-4"
+                                        value="Lancer une recherche"
+                                        onClick={handleButton}
+                                    />
+                                </>
+                            )
+                        }
+                        {/* progress */}
+                        {
+                            isLoading && (
+                                <>
+                                    <p className="text-center mt-5">Progression...<i className="fa fa-spinner fa-spin mb-3"></i> : {progress}%
+                                        <ProgressBar
+                                            completed={progress}
+                                            className="wrapper"
+                                            bgColor='green'
+                                            borderRadius="2px"
                                         />
-                                        <p>
-                                            <input type="button"
-                                                onClick={reinit}
-                                                className="btn btn-dark mt-3"
-                                                value="Rechercher autres" />
-                                            <button className='btn btn-success' onClick={verifData} style={{ marginLeft: "10px" }}> Vérifier </button>
-                                        </p>
-                                    </>
-                                )
-                            }
-                            {/* Forms */}
-                            {
-                                !isLoading && !text && (
-                                    <>
-                                        < input type="file"
-                                            className="form-control"
-                                            onChange={
-                                                (e) => setImage(URL.createObjectURL(e.target.files[0]))
-                                            }
-                                        />  <input
-                                            type="button"
-                                            className="form-control btn btn-default mt-4"
-                                            value="Lancer une recherche"
-                                            onClick={handleButton}
-                                        />
-                                    </>
-                                )
-                            }
-                            {/* progress */}
-                            {
-                                isLoading && (
-                                    <>
-                                        <p className="text-center mt-5">Progression...<i className="fa fa-spinner fa-spin"></i> : {progress}%
-                                            <ProgressBar
-                                                completed={progress}
-                                                className="wrapper"
-                                                bgColor='green'
-                                                borderRadius="2px"
-                                            />
-                                        </p>
-                                    </>
-                                )
-                            }
-                            {/* Text Area */}
-
-                        </div>
-                        <div className="col-md-6">
+                                    </p>
+                                </>
+                            )
+                        }
+                        <div className="col-md-12">
                             <h3 className="mt-5 mb-4 text-center" > Rechercher Par caméra</h3>
                             <WebCam />
                         </div>
+
                     </div>
                 </div>
                 <ModalDetail

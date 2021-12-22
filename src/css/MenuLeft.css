@@ -3,6 +3,7 @@
     height:93vh;
     background-color: #eee;
     position:fixed;
+    position:fixed;
   }
   
   .vertical-menu a {
@@ -18,6 +19,7 @@
   }
   
   .vertical-menu a.active {
-    background-color: #04AA6D; /* Add a green color to the "active/current" link */
-    color: white;
+    border-bottom: 5px solid #04AA6D; /* Add a green color to the "active/current" link */
+    color: rgb(31, 28, 28);
+    width: 160px;
   }
