@@ -1,6 +1,7 @@
 import { Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Api from "../api/Api"
+import axios from "axios"
 
 const ModalDetail = (props) => {
 
@@ -8,9 +9,11 @@ const ModalDetail = (props) => {
     const [id, setId] = useState();
 
     const fetchData = () => {
-        Api.getAllagent().then(res => {
-            const agents = res.data;
-            setData(agents);
+        axios.get(`http://localhost:8000/api/agents`).then(res=>{
+            setData(res.data);
+            console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
         })
     }
 
@@ -20,9 +23,6 @@ const ModalDetail = (props) => {
 
     useEffect(() => {
         fetchData();
-        if(text[0].id > 0){
-            setId(text[0].id)
-        }
     }, []);
 
 
@@ -38,19 +38,18 @@ const ModalDetail = (props) => {
                             <tr>
                                 <th>Noms</th>
                                 <th>Fonction</th>
-                                <th>Profile</th>
                                 <th>Numéro d'immatriculation</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                id > 0 ? (<>
+                                text[0].id > 0 ? (<>
                                     {
                                         data.map((val, index) => {
-                                            if (id === val.id) {
+                                            if (text[0].id === val.id) {
                                                 return (
                                                     <>
-                                                        <tr>
+                                                        <tr key={index}>
                                                             <td>{val.noms}</td>
                                                             <td>{val.fonction}</td>
                                                             <td>{val.num_plaque}</td>
@@ -60,11 +59,11 @@ const ModalDetail = (props) => {
                                             }
                                         })
                                     }
-                                    <tr>
-                                        <td></td>
-                                    </tr>
 
-                                </>) : ""
+                                </>) :
+                                    <tr>
+                                        <td colSpan="3px">Aucune information ne correspond à ce numéro d'immatriculation</td>
+                                    </tr>
                             }
                         </tbody>
                     </table>

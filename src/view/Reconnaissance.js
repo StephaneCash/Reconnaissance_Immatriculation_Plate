@@ -42,7 +42,6 @@ function Reconnaissance() {
             console.log("Objet : ", replaceText.replace(",", ""));
 
             for (const dataObj of data) {
-                console.log(dataObj.num_plaque)
                 if (textF.includes(dataObj.num_plaque)) {
                     console.log("Found : ", dataObj.num_plaque);
                     setContent({
@@ -66,7 +65,6 @@ function Reconnaissance() {
         console.log(image);
         Tesseract.recognize(image, "eng", {
             logger: (m) => {
-                console.log(m);
                 if (m.status) {
                     setProgress(parseInt(m.progress * 100));
                 }
